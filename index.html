@@ -8,7 +8,14 @@
     <body>
         <label>
             <span>🔎</span>
-            <input type="text" id="search-bar" />
+            <input type="text" id="search-bar" onsubmit="search()" />
+            <button type="submit" onclick="search()">🦆</button>
         </label>
     </body>
+    <script>
+        function search() {
+            const searchInput = document.getElementById("search-bar").value;
+            window.location.assign("search.html?q=" + searchInput);
+        }
+    </script>
 </html>
