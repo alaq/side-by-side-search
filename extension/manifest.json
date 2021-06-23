@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Side-by-side Search Enabler",
+    "version": "1.0.0",
+    "description": "Drops X-Frame-Options and Content-Security-Policy HTTP response headers, allowing search engine pages to be displayed in frames.",
+    "author": "Adrien Lacquemant",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
+}
