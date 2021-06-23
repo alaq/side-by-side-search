@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f6ff;
+}
+
+label {
+    position: relative;
+    cursor: pointer;
+}
+
+.search-icon:before {
+    content: "\f002";
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    right: 16px;
+    bottom: 0px;
+    font-family: "FontAwesome";
+    color: #828e9e;
+}
+
+input {
+    width: 16px;
+    height: 16px;
+    border: none;
+    outline: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: 0.5s;
+    color: #a3acc4;
+    background-color: #fff;
+    caret-color: #828e9e;
+}
+
+input {
+    width: 50vw;
+    box-shadow: 0px 5px 25px -5px rgba(215, 215, 215, 100%);
+}
