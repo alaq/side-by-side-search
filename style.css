@@ -1,42 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f3f6ff;
+    background: #f3f6ff;
+    padding: 0 20px;
 }
 
-label {
-    position: relative;
-    cursor: pointer;
+::selection {
+    color: #fff;
+    background: #664aff;
 }
 
-.search-icon:before {
-    content: "\f002";
-    position: absolute;
-    left: 16px;
-    top: 16px;
-    right: 16px;
-    bottom: 0px;
-    font-family: "FontAwesome";
-    color: #828e9e;
+.wrapper {
+    max-width: 450px;
+    margin: 150px auto;
 }
 
-input {
-    width: 16px;
-    height: 16px;
-    border: none;
-    outline: none;
-    padding: 16px;
+.wrapper .search-input {
+    background: #fff;
+    width: 100%;
     border-radius: 8px;
-    font-size: 1em;
-    transition: 0.5s;
-    color: #a3acc4;
-    background-color: #fff;
     caret-color: #828e9e;
+    position: relative;
+    box-shadow: 0px 5px 25px -5px rgba(215, 215, 215, 1);
 }
 
-input {
-    width: 50vw;
-    box-shadow: 0px 5px 25px -5px rgba(215, 215, 215, 100%);
+.search-input input {
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    /* box-shadow: 0px 5px 25px -5px rgba(215, 215, 215, 1); */
+}
+
+.search-input.active input {
+    border-radius: 5px 5px 0 0;
+}
+
+.search-input .autocom-box {
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.search-input.active .autocom-box {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    display: none;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
+
+.search-input.active .autocom-box li {
+    display: block;
+}
+.autocom-box li:hover {
+    background: #efefef;
+}
+
+.search-input .icon {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+    color: #644bff;
+    cursor: pointer;
 }

@@ -3,18 +3,58 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="style.css" rel="stylesheet" />
+        <link href="build/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <label>
-            <span>🔎</span>
-            <input type="text" id="search-bar" onsubmit="search()" />
-            <button type="submit" onclick="search()">🦆</button>
-        </label>
+        <div class="p-8 flex items-center justify-center bg-white">
+            <div class="w-full max-w-xl mx-auto">
+                <div class="mt-1 flex rounded-md shadow-sm">
+                    <div class="relative flex items-stretch flex-grow focus-within:z-10">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <!-- Heroicon name: solid/users -->
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            name="search"
+                            id="search"
+                            class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300"
+                            placeholder="Type here to search..."
+                        />
+                    </div>
+
+                    <button
+                        class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                        <span>Search on</span>
+                        <select
+                            id="engines"
+                            name="engines"
+                            class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                        >
+                            <option>Brave & Google</option>
+                            <option>DDG & Google</option>
+                            <option>Brave & DDG</option>
+                        </select>
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         function search() {
-            const searchInput = document.getElementById("search-bar").value;
+            const searchInput = document.getElementById("search").value;
             window.location.assign("search.html?q=" + searchInput);
         }
     </script>
