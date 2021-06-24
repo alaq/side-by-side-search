@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com">
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script type="text/javascript">
-            const loadPage = () => {
-                const params = new URLSearchParams(window.location.search);
-                document.getElementById("left-frame").src = "https://search.brave.com/search?q=" + params.get("q");
-                document.getElementById("right-frame").src = "https://google.com/search?igu=1&ei=&q=" + params.get("q");
-            }
+        <script src="search.js"></script>
         </script>
     </head>
-    <frameset cols="*,*" onload="loadPage();">
-        <frame id="left-frame" is="x-frame-bypass" src="#">
-        <frame id="right-frame" is="x-frame-bypass" src="#">
+    <frameset cols="*,*">
+        <frame frameborder="0" id="left-frame" is="x-frame-bypass" src="#">
+        <frame frameborder="0" id="right-frame" is="x-frame-bypass" src="#">
     </frameset>
 </html>
