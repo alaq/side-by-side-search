@@ -5,13 +5,17 @@
     "description": "Drops X-Frame-Options and Content-Security-Policy HTTP response headers, allowing search engine pages to be displayed in frames.",
     "author": "Adrien Lacquemant",
     "icons": {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
+        "16": "icons/icon16.png",
+        "32": "icons/icon32.png",
+        "64": "icons/icon64.png"
     },
-
     "background": {
         "scripts": ["background.js"]
     },
-    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>", "https://paste.mozilla.org/api/", "search"],
+    "options_ui": {
+        "page": "/index.html",
+        "browser_style": false,
+        "open_in_tab": true
+    }
 }
