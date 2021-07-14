@@ -57,7 +57,7 @@ function createXMLString() {
     url.setAttribute("method", "GET");
 
     const image = doc.getElementsByTagName("Image")[0];
-    image.textContent = browser.extension.getURL("icon/icon64.png");
+    image.textContent = "https://side-by-side-search.vercel.app/images/icon64.png";
 
     const suggestUrl = doc.querySelector('Url[type="application/x-suggestions+json"]');
     suggestUrl.setAttribute("method", "GET");
@@ -74,4 +74,4 @@ function createXMLString() {
 }
 
 console.log(createXMLString());
-onLoad(createXMLString());
+// onLoad(createXMLString());

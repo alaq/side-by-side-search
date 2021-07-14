@@ -1,21 +1,39 @@
 {
-    "manifest_version": 2,
-    "name": "Side-by-side Search",
-    "version": "1.0.0",
-    "description": "Drops X-Frame-Options and Content-Security-Policy HTTP response headers, allowing search engine pages to be displayed in frames.",
     "author": "Adrien Lacquemant",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "extension-content-only.js"
+            ],
+            "matches": [
+                "https://side-by-side-search.vercel.app/*",
+                "https://side-by-side-search.vercel.app/index.html",
+                "file:///Users/adrien/git/side-by-side-search/frontend/index.html"
+            ]
+        }
+    ],
+    "description": "Drops X-Frame-Options and Content-Security-Policy HTTP response headers, allowing search engine pages to be displayed in frames.",
     "icons": {
         "16": "icons/icon16.png",
         "32": "icons/icon32.png",
         "64": "icons/icon64.png"
     },
-    "background": {
-        "scripts": ["background.js"]
-    },
-    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"],
+    "manifest_version": 2,
+    "name": "Side-by-side Search",
     "options_ui": {
-        "page": "/index.html",
         "browser_style": false,
-        "open_in_tab": true
-    }
+        "open_in_tab": true,
+        "page": "/index.html"
+    },
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>"
+    ],
+    "version": "1.0.0"
 }
