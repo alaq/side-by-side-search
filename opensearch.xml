@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-  <ShortName>Side-by-side Search</ShortName>
-  <Description>Side-by-side comparison of your favorite search engines</Description>
-  <InputEncoding>UTF-8</InputEncoding>
-  <Image width="32" height="32" type="image/png">https://cdn.search.brave.com/serp/v1/static/brand/16c26cd189da3f0f7ba4e55a584ddde6a7853c9cc340ff9f381afc6cb18e9a1e-favicon-32x32.png</Image>
-  <Url type="text/html" method="get" template="https://search.brave.com/search?q={searchTerms}"/>
-  <Url type="application/x-suggestions+json" method="get" template="https://search.brave.com/api/suggest?q={searchTerms}"/>
-</OpenSearchDescription>

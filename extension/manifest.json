@@ -12,7 +12,7 @@
     "background": {
         "scripts": ["background.js"]
     },
-    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>", "https://paste.mozilla.org/api/", "search"],
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"],
     "options_ui": {
         "page": "/index.html",
         "browser_style": false,
