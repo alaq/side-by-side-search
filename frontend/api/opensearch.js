@@ -19,7 +19,7 @@ function createXMLString(left, right) {
     <InputEncoding>UTF-8</InputEncoding>
     <Image height="16" width="16">https://side-by-side-search.vercel.app/images/icon64.png</Image>
     <Url type="text/html" method="GET" template="https://side-by-side-search.vercel.app/search.html?q={searchTerm}&left=${left}&right=${right}"/>
-    <Url type="application/x-suggestions+json" method="GET" template="https://search.brave.com/api/suggest?q={searchTerms}"/>
+    <Url type="application/x-suggestions+json" method="GET" template="${suggestionMap[left]}"/>
     </OpenSearchDescription>`;
     return xml;
 }
