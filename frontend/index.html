@@ -7,35 +7,18 @@
         <script src="index.js"></script>
     </head>
     <body>
-        <div class="p-8 flex items-center justify-center bg-white">
-            <div class="w-full max-w-xl mx-auto">
-                <form id="search-form" action="search.html" class="hidden">
-                    <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Left</label>
-                        <select
-                            id="engine1"
-                            name="engine1"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                        >
-                            <option selected>Brave</option>
-                            <option>DuckDuckGo</option>
-                            <option>Startpage</option>
-                            <option>Google</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Right</label>
-                        <select
-                            id="engine2"
-                            name="engine2"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                        >
-                            <option>Brave</option>
-                            <option>DuckDuckGo</option>
-                            <option>Startpage</option>
-                            <option selected>Google</option>
-                        </select>
-                    </div>
+        <div class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                        🔍 Side-by-side search
+                    </h2>
+                    <p class="mt-5 text-xl text-gray-500">
+                        Compare two search engines side-by-side. You can even add it to your browser, you'll get
+                        autocompletion!
+                    </p>
+                </div>
+                <form id="search-form" class="mt-10 w-full max-w-lg" action="search.html" class="hidden">
                     <div class="mt-1 flex rounded-md shadow-sm">
                         <div class="relative flex items-stretch flex-grow focus-within:z-10">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -67,26 +50,85 @@
                             <span>Search</span>
                         </button>
                     </div>
+                    <div class="flex space-x-2">
+                        <div class="mt-1.5 relative">
+                            <select
+                                id="left"
+                                name="left"
+                                class="appearance-none block w-full bg-none bg-white border border-gray-300 rounded-md pl-3 pr-10 py-2 text-base text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            >
+                                <option selected>Brave</option>
+                                <option>DuckDuckGo</option>
+                                <option>Startpage</option>
+                                <option>Google</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
+                                <svg
+                                    class="h-4 w-4 text-gray-400"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-1.5 relative">
+                            <select
+                                id="right"
+                                name="right"
+                                class="appearance-none block w-full bg-none bg-white border border-gray-300 rounded-md pl-3 pr-10 py-2 text-base text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            >
+                                <option selected>Brave</option>
+                                <option>DuckDuckGo</option>
+                                <option>Startpage</option>
+                                <option selected>Google</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
+                                <!-- Heroicon name: solid/chevron-down -->
+                                <svg
+                                    class="h-4 w-4 text-gray-400"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-1.5 relative">
+                            <button
+                                type="button"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                <svg
+                                    class="h-4 w-4"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                Add to browser
+                            </button>
+                        </div>
+                    </div>
                 </form>
-                <button
-                    type="button"
-                    class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    <svg
-                        class="h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
-                    Add this combo as a search engine to your browser
-                </button>
             </div>
         </div>
     </body>
