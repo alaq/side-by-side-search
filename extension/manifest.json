@@ -1,15 +1,11 @@
 {
     "author": "Adrien Lacquemant",
     "background": {
-        "scripts": [
-            "background.js"
-        ]
+        "scripts": ["background.js"]
     },
     "content_scripts": [
         {
-            "js": [
-                "extension-content-only.js"
-            ],
+            "js": ["extension-content-only.js"],
             "matches": [
                 "https://side-by-side-search.vercel.app/*",
                 "https://side-by-side-search.vercel.app/index.html",
@@ -30,10 +26,6 @@
         "open_in_tab": true,
         "page": "/index.html"
     },
-    "permissions": [
-        "webRequest",
-        "webRequestBlocking",
-        "<all_urls>"
-    ],
+    "permissions": ["webRequest", "webRequestBlocking", "https://side-by-side-search.vercel.app/*"],
     "version": "1.0.0"
 }
