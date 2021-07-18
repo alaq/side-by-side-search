@@ -17,7 +17,7 @@ function createXMLString(left, right) {
     <InputEncoding>UTF-8</InputEncoding>
     <ShortName>Side-by-side Search</ShortName>
     <Description>Side-by-side comparison of your favorite search engines</Description>
-    <Url type="text/html" method="GET" template="https://side-by-side-search.vercel.app/search.html?q={searchTerm}&left=${left}&right=${right}"/>
+    <Url type="text/html" method="GET" template="https://side-by-side-search.vercel.app/search.html?q={searchTerms}"/>
     <Url type="application/x-suggestions+json" method="GET" template="${suggestionMap[left]}"/>
     <Image height="16" width="16">https://side-by-side-search.vercel.app/images/icon64.png</Image>
 </OpenSearchDescription>`;
