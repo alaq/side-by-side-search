@@ -2,8 +2,11 @@ const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"
 
 chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
-        if (details?.documentUrl.includes("https://side-by-side-search.vercel.app/search.html?q=")) {
-            console.log(details);
+        if (
+            (details?.documentUrl &&
+                details.documentUrl.includes("https://side-by-side-search.vercel.app/search.html?q=")) ||
+            details.initiator === "https://side-by-side-search.vercel.app"
+        ) {
             return {
                 responseHeaders: details.responseHeaders.filter(
                     (header) => !HEADERS_TO_STRIP_LOWERCASE.includes(header.name.toLowerCase())
@@ -14,7 +17,7 @@ chrome.webRequest.onHeadersReceived.addListener(
     {
         urls: ["<all_urls>"],
     },
-    ["blocking", "responseHeaders"]
+    ["blocking", "responseHeaders", chrome.webRequest.OnSendHeadersOptions.EXTRA_HEADERS].filter(Boolean)
 );
 
 chrome.runtime.onInstalled.addListener((details) => {
