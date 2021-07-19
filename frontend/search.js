@@ -7,6 +7,7 @@ const engineMap = {
 
 const loadFrames = () => {
     const params = new URLSearchParams(window.location.search);
+    document.title = params.get("q") + " - Side-by-side Search";
     document.getElementById("left-frame").src = engineMap[params.get("left")] + params.get("q");
     document.getElementById("right-frame").src = engineMap[params.get("right")] + params.get("q");
 };
