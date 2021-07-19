@@ -27,6 +27,14 @@ const hideInstructions = () => {
     document.getElementById("installation-notification").classList.add("hidden");
 };
 
+const loadInstructions = () => {
+    if (navigator?.userAgent?.includes("Chrome/")) {
+        document.getElementById("install-text").innerHTML =
+            "💡 Now, install <b>Side-by-side search</b> as a search engine in your browser by right clicking in the address bar, selecting <b>Manage search engine</b> and making <b>Side-by-side Search</b> your default.";
+    }
+};
+
 window.onload = () => {
     loadPreferences();
+    loadInstructions();
 };
