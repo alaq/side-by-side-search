@@ -26,6 +26,6 @@
         "open_in_tab": true,
         "page": "/index.html"
     },
-    "permissions": ["webRequest", "webRequestBlocking", "https://side-by-side-search.vercel.app/*"],
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>"],
     "version": "1.0.0"
 }
