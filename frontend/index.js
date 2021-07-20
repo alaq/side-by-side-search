@@ -29,8 +29,39 @@ const hideInstructions = () => {
 
 const loadInstructions = () => {
     if (navigator?.userAgent?.includes("Chrome/")) {
-        document.getElementById("install-text").innerHTML =
-            "💡 Now, install <b>Side-by-side search</b> as a search engine in your browser by right clicking in the address bar, selecting <b>Manage search engine</b> and making <b>Side-by-side Search</b> your default.";
+        document.getElementById(
+            "install-text"
+        ).innerHTML = `💡 Now, install <b>Side-by-side search</b> as a search engine in Chrome:
+        <ul>
+            <li>
+                - Go to
+                <a
+                    href="chrome://settings/searchEngines"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                    >chrome://settings/searchEngines</a
+                >.
+            </li>
+            <li>
+                - Find <b>Side-by-side Search</b>, click on the three dots and select <b>Make
+                default</b>.
+            </li>
+        </ul>`;
+    } else {
+        document.getElementById(
+            "install-text"
+        ).innerHTML = `💡 Now, install <b>Side-by-side search</b> as a search engine in Firefox:
+        <ul>
+            <li>- Right click in the address bar and select <b>Add Side-by-side Search</b>.</li>
+            <li>
+                - Go to
+                <a
+                    href="about:preferences#search"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                    >about:preferences#search</a
+                >
+                and under <b>Default Search Engine</b>, select <b>Side-by-side Search</b>.
+            </li>
+        </ul>`;
     }
 };
 
