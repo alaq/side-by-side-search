@@ -20,7 +20,9 @@
     </head>
     <body>
         <div class="bg-white">
-            <div class="max-w-7xl mx-auto py-16 px-4 sm:pt-36 sm:pb-18 sm:px-6 lg:px-8 lg:flex lg:justify-between">
+            <div
+                class="max-w-7xl mx-auto py-16 px-4 sm:pt-36 sm:pb-18 sm:px-6 lg:px-8 lg:flex lg:justify-between sm:flex sm:flex-wrap sm:content-around"
+            >
                 <div class="max-w-2xl">
                     <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
                         🔍 Side-by-side search
@@ -30,10 +32,18 @@
                         autocompletion!
                     </p>
                 </div>
-                <a href="https://chrome.google.com/webstore/detail/kgmdihphaafgjnjpadofpigopbfjbkdd" target="blank">
+                <a
+                    href="https://chrome.google.com/webstore/detail/kgmdihphaafgjnjpadofpigopbfjbkdd"
+                    target="blank"
+                    class="m-4"
+                >
                     <img src="./images/chrome.png" class="extension-stores object-none" />
                 </a>
-                <a href="https://addons.mozilla.org/en-US/firefox/addon/side-by-side-search/" target="blank">
+                <a
+                    href="https://addons.mozilla.org/en-US/firefox/addon/side-by-side-search/"
+                    target="blank"
+                    class="m-4"
+                >
                     <img src="./images/firefox.png" class="extension-stores object-none" />
                 </a>
                 <form id="search-form" class="mt-10 w-full max-w-lg hidden" action="search.html">
@@ -155,8 +165,9 @@
                                         class="font-medium text-indigo-600 hover:text-indigo-500"
                                         >!g</a
                                     >
-                                    at all times. By having Google's results alongside another engine's is a good way to
-                                    ease the transition, as one learns to trust the results.
+                                    at all times. A good way to start using a different search engine is to have
+                                    Google's results side-by-side. It eases the transition, as one learns to trust the
+                                    results.
                                 </dd>
                             </div>
                             <div>
@@ -178,8 +189,8 @@
                                     🕵️‍♂️ Why do I need an extension to make this work?
                                 </dt>
                                 <dd class="mt-2 text-base text-gray-500">
-                                    Search engines do not let display their search results in frames. They set
-                                    X-Frame-Options which indicates your browser to not display the page. The extension
+                                    Search engines do not let you display their search results in frames. They set
+                                    X-Frame-Options which tell your browser to not display the page. The extension
                                     strips the header to display the page in the frame.
                                 </dd>
                             </div>
@@ -191,11 +202,10 @@
                                     <ul>
                                         <li>
                                             - Go to
-                                            <a
-                                                href="chrome://settings/searchEngines"
-                                                class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                >chrome://settings/searchEngines</a
-                                            >.
+                                            <span class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                chrome://settings/searchEngines
+                                            </span>
+                                            (copy-paste it).
                                         </li>
                                         <li>
                                             - Find "Side-by-side Search", click on the three dots and select "Make
@@ -213,12 +223,11 @@
                                         <li>- Right click in the address bar and select "Add Side-by-side Search".</li>
                                         <li>
                                             - Go to
-                                            <a
-                                                href="about:preferences#search"
-                                                class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                >about:preferences#search</a
-                                            >
-                                            and under "Default Search Engine", select "Side-by-side Search".
+                                            <span class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                about:preferences#search
+                                            </span>
+                                            (copy-paste it) and under "Default Search Engine", select "Side-by-side
+                                            Search".
                                         </li>
                                     </ul>
                                 </dd>
