@@ -50,3 +50,19 @@ function showSearchPage() {
         }
     });
 }
+
+chrome.webNavigation.onBeforeNavigate.addListener((details, _, sendResponse) => {
+    if (details.parentFrameId === 0 && !details.url.includes("https://google.com/search")) {
+        chrome.tabs.get(details.tabId, (tab) => {
+            if (
+                tab.url.includes(
+                    "file:///Users/adrien/git/side-by-side-search/frontend/search.html" ||
+                        "https://side-by-side-search.vercel.app/search.html"
+                )
+            ) {
+                chrome.tabs.update(details.tabId, { url: details.url });
+            }
+        });
+        return true;
+    }
+});
