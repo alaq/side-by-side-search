@@ -2,7 +2,7 @@ const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"
 
 const BASE_URL = "https://side-by-side-search.vercel.app/";
 
-const DEV_URL = "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
+const DEV_URL = null; // "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
 
 const engineMap = {
     Google: "https://google.com/search?igu=1&ei=&q=",
