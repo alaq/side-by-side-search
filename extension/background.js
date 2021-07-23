@@ -1,5 +1,9 @@
 const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"];
 
+const BASE_URL = "https://side-by-side-search.vercel.app/";
+
+const DEV_URL = "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
+
 const engineMap = {
     Google: "https://google.com/search?igu=1&ei=&q=",
     Brave: "https://search.brave.com/search?q=",
@@ -10,9 +14,8 @@ const engineMap = {
 chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
         if (
-            (details?.documentUrl &&
-                details.documentUrl.includes("https://side-by-side-search.vercel.app/search.html?q=")) ||
-            details.initiator === "https://side-by-side-search.vercel.app"
+            (details?.documentUrl && details.documentUrl.includes(BASE_URL + "search.html?q=")) ||
+            details.initiator === BASE_URL
         ) {
             return {
                 responseHeaders: details.responseHeaders.filter(
@@ -51,7 +54,7 @@ function showSearchPage() {
         });
         if (!foundExisting) {
             chrome.tabs.create({
-                url: "https://side-by-side-search.vercel.app/",
+                url: BASE_URL,
                 active: true,
             });
         }
@@ -61,12 +64,7 @@ function showSearchPage() {
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.parentFrameId === 0 && !Object.values(engineMap).some((engineUrl) => details.url.includes(engineUrl))) {
         chrome.tabs.get(details.tabId, (tab) => {
-            if (
-                tab.url.includes(
-                    "file:///Users/adrien/git/side-by-side-search/frontend/search.html" ||
-                        "https://side-by-side-search.vercel.app/search.html"
-                )
-            ) {
+            if (tab.url.includes(DEV_URL || BASE_URL + "search.html")) {
                 chrome.tabs.update(details.tabId, { url: details.url });
             }
         });
