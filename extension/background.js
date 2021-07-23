@@ -1,5 +1,12 @@
 const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"];
 
+const engineMap = {
+    Google: "https://google.com/search?igu=1&ei=&q=",
+    Brave: "https://search.brave.com/search?q=",
+    DuckDuckGo: "https://duckduckgo.com/?q=",
+    Startpage: "https://www.startpage.com/do/dsearch?query=",
+};
+
 chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
         if (
@@ -51,8 +58,8 @@ function showSearchPage() {
     });
 }
 
-chrome.webNavigation.onBeforeNavigate.addListener((details, _, sendResponse) => {
-    if (details.parentFrameId === 0 && !details.url.includes("https://google.com/search")) {
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+    if (details.parentFrameId === 0 && !Object.values(engineMap).some((engineUrl) => details.url.includes(engineUrl))) {
         chrome.tabs.get(details.tabId, (tab) => {
             if (
                 tab.url.includes(
