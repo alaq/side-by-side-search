@@ -8,15 +8,12 @@ function getFrameDepth(w) {
 }
 
 if (getFrameDepth(window.self) === 1) {
-    let focused = true;
-    const scrollPort = chrome.extension.connect({ name: "scroll" });
+    const scrollPort = chrome.runtime.connect({ name: "scroll" });
 
     document.addEventListener("scroll", function () {
-        if (!focused) {
-            return;
-        }
         const x = window.scrollX;
         const y = window.scrollY;
+        console.log("scroll", x, y);
         scrollPort.postMessage({ x, y });
     });
 

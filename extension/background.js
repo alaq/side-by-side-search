@@ -71,3 +71,17 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
         return true;
     }
 });
+
+const sendToSiblingFrame = () => {
+    console.log(port.sender);
+};
+
+chrome.runtime.onConnect.addListener(function (port) {
+    console.assert(port.name === "scroll");
+    port.onMessage.addListener(function emit(msg) {
+        if (msg.y) {
+            console.log("background receives scrollXY:" + msg.x + "," + msg.y);
+            sendToSiblingFrame(port, msg);
+        }
+    });
+});
