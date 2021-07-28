@@ -11,6 +11,18 @@
                 "https://side-by-side-search.vercel.app/index.html",
                 "file:///Users/adrien/git/side-by-side-search/frontend/index.html"
             ]
+        },
+        {
+            "js": ["scroll-sync.js"],
+            "all_frames": true,
+            "matches": [
+                "https://google.com/search?igu=1&ei=&q=*",
+                "https://search.brave.com/search?q=*",
+                "https://duckduckgo.com/?q=*",
+                "https://www.startpage.com/do/dsearch?query=*",
+                "https://side-by-side-search.vercel.app/*",
+                "https://*/*"
+            ]
         }
     ],
     "description": "Compare search results side by side on https://side-by-side-search.vercel.app/!",
