@@ -26,9 +26,9 @@ if (getFrameDepth(window.self) === 1) {
     });
 
     scrollPort.onMessage.addListener(function (msg) {
-        if ((msg.y || msg.x) && !focused) {
-            console.log("scroll received:" + msg.x + "," + msg.y);
-            window.scroll(msg.x, msg.y);
+        if (msg.y || msg.x) {
+            console.log("scroll received:", msg.x, msg.y, msg);
+            window.scroll({ x: msg.x, y: msg.y, behavior: "smooth" });
         }
     });
 }

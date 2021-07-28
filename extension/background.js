@@ -4,6 +4,8 @@ const BASE_URL = "https://side-by-side-search.vercel.app/";
 
 const DEV_URL = null; // "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
 
+const portsMap = {};
+
 const engineMap = {
     Google: "https://google.com/search?igu=1&ei=&q=",
     Brave: "https://search.brave.com/search?q=",
@@ -72,12 +74,24 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     }
 });
 
-const sendToSiblingFrame = () => {
-    console.log(port.sender);
+const sendToSiblingFrame = (port, msg) => {
+    chrome.webNavigation.getAllFrames(
+        {
+            tabId: port.sender.tab.id,
+        },
+        (frames) => {
+            portsMap[
+                frames.filter((f) => {
+                    return f.frameId !== port.sender.frameId && f.parentFrameId !== -1;
+                })[0].frameId
+            ].postMessage(msg);
+        }
+    );
 };
 
 chrome.runtime.onConnect.addListener(function (port) {
     console.assert(port.name === "scroll");
+    portsMap[port.sender.frameId] = port;
     port.onMessage.addListener(function emit(msg) {
         if (msg.y) {
             console.log("background receives scrollXY:" + msg.x + "," + msg.y);
