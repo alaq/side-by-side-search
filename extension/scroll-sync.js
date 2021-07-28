@@ -1,3 +1,5 @@
+let scrollLock = false;
+
 function getFrameDepth(w) {
     if (w === window.top) {
         return 0;
@@ -10,25 +12,19 @@ function getFrameDepth(w) {
 if (getFrameDepth(window.self) === 1) {
     const scrollPort = chrome.runtime.connect({ name: "scroll" });
 
-    document.addEventListener("scroll", function () {
-        const x = window.scrollX;
-        const y = window.scrollY;
-        console.log("scroll", x, y);
-        scrollPort.postMessage({ x, y });
-    });
-
-    window.addEventListener("focus", function () {
-        focused = true;
-    });
-
-    window.addEventListener("blur", function () {
-        focused = false;
+    document.addEventListener("scroll", function (e) {
+        if (!scrollLock) {
+            const x = window.scrollX;
+            const y = window.scrollY;
+            scrollPort.postMessage({ x, y });
+            scrollLock = false;
+        }
     });
 
     scrollPort.onMessage.addListener(function (msg) {
         if (msg.y || msg.x) {
-            console.log("scroll received:", msg.x, msg.y, msg);
-            window.scroll({ x: msg.x, y: msg.y, behavior: "smooth" });
+            scrollLock = true;
+            window.scroll(0, msg.y);
         }
     });
 }

@@ -94,7 +94,6 @@ chrome.runtime.onConnect.addListener(function (port) {
     portsMap[port.sender.frameId] = port;
     port.onMessage.addListener(function emit(msg) {
         if (msg.y) {
-            console.log("background receives scrollXY:" + msg.x + "," + msg.y);
             sendToSiblingFrame(port, msg);
         }
     });
