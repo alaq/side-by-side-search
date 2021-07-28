@@ -1,5 +1,3 @@
-let focused = true;
-
 function getFrameDepth(w) {
     if (w === window.top) {
         return 0;
@@ -10,16 +8,30 @@ function getFrameDepth(w) {
 }
 
 if (getFrameDepth(window.self) === 1) {
+    let focused = true;
+    const scrollPort = chrome.extension.connect({ name: "scroll" });
+
     document.addEventListener("scroll", function () {
         if (!focused) {
             return;
         }
-        var x = window.scrollX;
-        var y = window.scrollY;
-        console.log("tab sends scrollXY:" + x + "," + y);
-        // sync_scroll.port.postMessage({
-        //     window_scrollX: x,
-        //     window_scrollY: y,
-        // });
+        const x = window.scrollX;
+        const y = window.scrollY;
+        scrollPort.postMessage({ x, y });
+    });
+
+    window.addEventListener("focus", function () {
+        focused = true;
+    });
+
+    window.addEventListener("blur", function () {
+        focused = false;
+    });
+
+    scrollPort.onMessage.addListener(function (msg) {
+        if ((msg.y || msg.x) && !focused) {
+            console.log("scroll received:" + msg.x + "," + msg.y);
+            window.scroll(msg.x, msg.y);
+        }
     });
 }
