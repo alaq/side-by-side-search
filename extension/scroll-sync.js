@@ -24,7 +24,7 @@ if (getFrameDepth(window.self) === 1) {
     scrollPort.onMessage.addListener(function (msg) {
         if (msg.y || msg.x) {
             scrollLock = true;
-            window.scroll(0, msg.y);
+            window.scroll(msg.x, msg.y);
         }
     });
 }

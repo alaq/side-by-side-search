@@ -14,6 +14,36 @@ const loadPreferences = () => {
         document.getElementById("left").value = engines.left;
         document.getElementById("right").value = engines.right;
     }
+    const syncScroll = JSON.parse(localStorage.getItem("syncScroll"));
+    if (syncScroll || syncScroll !== false) {
+        const button = document.getElementById("sync-scroll-button");
+        button.classList.remove("bg-gray-200");
+        button.classList.add("bg-indigo-600");
+        const span = document.getElementById("sync-scroll-span");
+        span.classList.remove("translate-x-0");
+        span.classList.add("translate-x-5");
+    }
+};
+
+const toggleScrollSync = () => {
+    const syncScroll = JSON.parse(localStorage.getItem("syncScroll"));
+    if (syncScroll || syncScroll !== false) {
+        const button = document.getElementById("sync-scroll-button");
+        button.classList.remove("bg-indigo-600");
+        button.classList.add("bg-gray-200");
+        const span = document.getElementById("sync-scroll-span");
+        span.classList.remove("translate-x-5");
+        span.classList.add("translate-x-0");
+        localStorage.setItem("syncScroll", false);
+    } else {
+        const button = document.getElementById("sync-scroll-button");
+        button.classList.remove("bg-gray-200");
+        button.classList.add("bg-indigo-600");
+        const span = document.getElementById("sync-scroll-span");
+        span.classList.remove("translate-x-0");
+        span.classList.add("translate-x-5");
+        localStorage.setItem("syncScroll", true);
+    }
 };
 
 const setOpensearchUrl = ({ left = "Brave", right = "Google" }) => {
