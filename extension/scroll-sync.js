@@ -1,4 +1,5 @@
 let scrollLock = false;
+let scrollSyncEnabled = false;
 
 function getFrameDepth(w) {
     if (w === window.top) {
@@ -12,8 +13,9 @@ function getFrameDepth(w) {
 if (getFrameDepth(window.self) === 1) {
     const scrollPort = chrome.runtime.connect({ name: "scroll" });
 
-    document.addEventListener("scroll", function (e) {
-        if (!scrollLock) {
+    document.addEventListener("scroll", function () {
+        if (!scrollLock && scrollSyncEnabled) {
+            console.log("we get in here");
             const x = window.scrollX;
             const y = window.scrollY;
             scrollPort.postMessage({ x, y });
@@ -30,5 +32,5 @@ if (getFrameDepth(window.self) === 1) {
 }
 
 window.addEventListener("message", (event) => {
-    console.log(event);
+    scrollSyncEnabled = JSON.parse(event.data.scrollSync) ?? true;
 });

@@ -15,7 +15,7 @@ const loadPreferences = () => {
         document.getElementById("right").value = engines.right;
     }
     const syncScroll = JSON.parse(localStorage.getItem("syncScroll"));
-    if (syncScroll || syncScroll !== false) {
+    if (syncScroll ?? true) {
         const button = document.getElementById("sync-scroll-button");
         button.classList.remove("bg-gray-200");
         button.classList.add("bg-indigo-600");
@@ -34,7 +34,7 @@ const toggleScrollSync = () => {
         const span = document.getElementById("sync-scroll-span");
         span.classList.remove("translate-x-5");
         span.classList.add("translate-x-0");
-        localStorage.setItem("syncScroll", false);
+        localStorage.setItem("syncScroll", JSON.stringify(false));
     } else {
         const button = document.getElementById("sync-scroll-button");
         button.classList.remove("bg-gray-200");
@@ -42,7 +42,7 @@ const toggleScrollSync = () => {
         const span = document.getElementById("sync-scroll-span");
         span.classList.remove("translate-x-0");
         span.classList.add("translate-x-5");
-        localStorage.setItem("syncScroll", true);
+        localStorage.setItem("syncScroll", JSON.stringify(true));
     }
 };
 
