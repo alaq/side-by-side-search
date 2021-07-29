@@ -10,6 +10,15 @@ const loadFrames = () => {
     document.title = params.get("q") + " - Side-by-side Search";
     document.getElementById("left-frame").src = engineMap[params.get("left")] + params.get("q");
     document.getElementById("right-frame").src = engineMap[params.get("right")] + params.get("q");
+    const isSyncScrollEnabled = localStorage.getItem("syncScroll");
+
+    setTimeout(() => {
+        Array.from(window.frames).forEach((frame) => {
+            if (frame.postMessage) {
+                frame.postMessage({ scrollSync: isSyncScrollEnabled }, "*");
+            }
+        });
+    }, 3000); // TODO find a better way to ensure the pages are loaded
 };
 
 document.addEventListener("DOMContentLoaded", loadFrames);

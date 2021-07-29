@@ -28,3 +28,7 @@ if (getFrameDepth(window.self) === 1) {
         }
     });
 }
+
+window.addEventListener("message", (event) => {
+    console.log(event);
+});
