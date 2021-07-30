@@ -1,16 +1,17 @@
 const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"];
-
 const BASE_URL = "https://side-by-side-search.vercel.app/";
-
 const DEV_URL = null; // "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
-
 const portsMap = {};
-
 const engineMap = {
-    Google: "https://google.com/search?igu=1&ei=&q=",
-    Brave: "https://search.brave.com/search?q=",
-    DuckDuckGo: "https://duckduckgo.com/?q=",
-    Startpage: "https://www.startpage.com/do/dsearch?query=",
+    Google: "google.com/search?igu=1&ei=&q=",
+    Brave: "search.brave.com/search?q=",
+    DuckDuckGo: "duckduckgo.com/?q=",
+    Startpage: "startpage.com/do/dsearch?query=",
+};
+let scrollSyncEnabled = false;
+
+const urlIsEngine = (url) => {
+    return Object.values(engineMap).some((engineUrl) => url.includes(engineUrl));
 };
 
 chrome.webRequest.onHeadersReceived.addListener(
@@ -64,7 +65,7 @@ function showSearchPage() {
 }
 
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    if (details.parentFrameId === 0 && !Object.values(engineMap).some((engineUrl) => details.url.includes(engineUrl))) {
+    if (details.parentFrameId === 0 && !urlIsEngine(details.url)) {
         chrome.tabs.get(details.tabId, (tab) => {
             if (tab.url.includes(DEV_URL || BASE_URL + "search.html")) {
                 chrome.tabs.update(details.tabId, { url: details.url });

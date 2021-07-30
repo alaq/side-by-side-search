@@ -15,7 +15,6 @@ if (getFrameDepth(window.self) === 1) {
 
     document.addEventListener("scroll", function () {
         if (!scrollLock && scrollSyncEnabled) {
-            console.log("we get in here");
             const x = window.scrollX;
             const y = window.scrollY;
             scrollPort.postMessage({ x, y });
@@ -23,10 +22,10 @@ if (getFrameDepth(window.self) === 1) {
         }
     });
 
-    scrollPort.onMessage.addListener(function (msg) {
-        if (msg.y || msg.x) {
+    scrollPort.onMessage.addListener((message) => {
+        if (message.y || message.x) {
             scrollLock = true;
-            window.scroll(msg.x, msg.y);
+            window.scroll(message.x, message.y);
         }
     });
 }
