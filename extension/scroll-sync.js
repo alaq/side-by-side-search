@@ -1,5 +1,15 @@
 let scrollLock = false;
 let scrollSyncEnabled = false;
+let localUrls;
+
+const domainsToFilter = [
+    "google.com",
+    "googleusercontent.com",
+    "duckduckgo.com",
+    "brave.com",
+    "startpage.com",
+    "javascript:void(0)",
+];
 
 function getFrameDepth(w) {
     if (w === window.top) {
@@ -12,6 +22,10 @@ function getFrameDepth(w) {
 
 if (getFrameDepth(window.self) === 1) {
     const scrollPort = chrome.runtime.connect({ name: "scroll" });
+
+    scrollPort.postMessage({
+        urls: (localUrls = getUrlsFromPage()),
+    });
 
     document.addEventListener("scroll", function () {
         if (!scrollLock && scrollSyncEnabled) {
@@ -26,6 +40,9 @@ if (getFrameDepth(window.self) === 1) {
         if (message.y || message.x) {
             scrollLock = true;
             window.scroll(message.x, message.y);
+        } else if (message.urls.length) {
+            remoteUrls = message.urls;
+            console.log("unique urls", getUniqueUrls(localUrls, remoteUrls));
         }
     });
 }
@@ -34,10 +51,14 @@ window.addEventListener("message", (event) => {
     scrollSyncEnabled = JSON.parse(event.data.scrollSync) ?? true;
 });
 
-window.onload = () => {
-    console.log(
-        Array.from(document.getElementsByTagName("a"))
-            .map((a) => a.href)
-            .filter((url) => !url.includes("google.com") && !url.includes("googleusercontent.com") && url !== "")
-    );
-};
+function getUrlsFromPage() {
+    return Array.from(document.getElementsByTagName("a"))
+        .map((a) => a.href)
+        .filter((url) => !domainsToFilter.some((domain) => url.includes(domain)) && url !== "");
+}
+
+function getUniqueUrls(localUrls, remoteUrls) {
+    return localUrls.filter((a) => {
+        return !remoteUrls.includes(a);
+    });
+}
