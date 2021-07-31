@@ -33,3 +33,11 @@ if (getFrameDepth(window.self) === 1) {
 window.addEventListener("message", (event) => {
     scrollSyncEnabled = JSON.parse(event.data.scrollSync) ?? true;
 });
+
+window.onload = () => {
+    console.log(
+        Array.from(document.getElementsByTagName("a"))
+            .map((a) => a.href)
+            .filter((url) => !url.includes("google.com") && !url.includes("googleusercontent.com") && url !== "")
+    );
+};
