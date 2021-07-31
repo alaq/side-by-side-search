@@ -94,7 +94,7 @@ chrome.runtime.onConnect.addListener(function (port) {
     console.assert(port.name === "scroll");
     portsMap[port.sender.frameId] = port;
     port.onMessage.addListener(function emit(msg) {
-        if (msg.y || msg.urls) {
+        if (msg.y || msg.urls || msg.ack) {
             sendToSiblingFrame(port, msg);
         }
     });

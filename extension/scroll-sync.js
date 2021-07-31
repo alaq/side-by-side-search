@@ -1,6 +1,7 @@
 let scrollLock = false;
 let scrollSyncEnabled = false;
 let localUrls;
+let sendUrlsAcknowledged = false;
 
 const domainsToFilter = [
     "google.com",
@@ -37,12 +38,28 @@ if (getFrameDepth(window.self) === 1) {
     });
 
     scrollPort.onMessage.addListener((message) => {
-        if (message.y || message.x) {
+        if (message.ack) {
+            sendUrlsAcknowledged = true;
+        } else if (message.y || message.x) {
             scrollLock = true;
             window.scroll(message.x, message.y);
         } else if (message.urls.length) {
+            scrollPort.postMessage({ ack: true });
+            if (!sendUrlsAcknowledged) {
+                scrollPort.postMessage({
+                    urls: getUrlsFromPage(),
+                });
+            }
             remoteUrls = message.urls;
-            console.log("unique urls", getUniqueUrls(localUrls, remoteUrls));
+
+            let uniqueUrls = getUniqueUrls(localUrls, remoteUrls);
+            console.log("unique urls on", window.location.host, uniqueUrls);
+
+            // Decorate links
+            let links = document.getElementsByTagName("a");
+            for (let i = 0; i < links.length; i++) {
+                if (uniqueUrls.includes(links[i].href)) links[i].style["background-color"] = "aqua";
+            }
         }
     });
 }
