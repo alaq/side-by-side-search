@@ -1,6 +1,9 @@
 const HEADERS_TO_STRIP_LOWERCASE = ["content-security-policy", "x-frame-options"];
-const BASE_URL = "https://side-by-side-search.vercel.app/";
-const DEV_URL = null; // "file:///Users/adrien/git/side-by-side-search/frontend/search.html";
+const SEARCH_BASE_URLS = [
+    "https://side-by-side-search.vercel.app/",
+    "file:///Users/adrien/git/side-by-side-search/frontend/",
+];
+const BASE_URL = SEARCH_BASE_URLS[0];
 const portsMap = {};
 const engineMap = {
     Google: "google.com/search?igu=1&ei=&q=",
@@ -17,8 +20,9 @@ const urlIsEngine = (url) => {
 chrome.webRequest.onHeadersReceived.addListener(
     (details) => {
         if (
-            (details?.documentUrl && details.documentUrl.includes(BASE_URL + "search.html?q=")) ||
-            details.initiator === BASE_URL
+            (details?.documentUrl &&
+                SEARCH_BASE_URLS.some((baseUrl) => details.documentUrl.includes(baseUrl + "search.html?q="))) ||
+            SEARCH_BASE_URLS.filter((baseUrl) => baseUrl === details.initiator).length
         ) {
             return {
                 responseHeaders: details.responseHeaders.filter(
@@ -67,7 +71,7 @@ function showSearchPage() {
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.parentFrameId === 0 && !urlIsEngine(details.url)) {
         chrome.tabs.get(details.tabId, (tab) => {
-            if (tab.url.includes(DEV_URL || BASE_URL + "search.html")) {
+            if (SEARCH_BASE_URLS.some((baseUrl) => tab.url.includes(baseUrl + "search.html"))) {
                 chrome.tabs.update(details.tabId, { url: details.url });
             }
         });

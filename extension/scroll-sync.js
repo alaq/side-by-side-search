@@ -10,6 +10,7 @@ const domainsToFilter = [
     "brave.com",
     "startpage.com",
     "javascript:void(0)",
+    "javascript:;",
 ];
 
 function getFrameDepth(w) {
