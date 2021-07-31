@@ -12,13 +12,19 @@ const loadFrames = () => {
     document.getElementById("right-frame").src = engineMap[params.get("right")] + params.get("q");
     const isSyncScrollEnabled = localStorage.getItem("syncScroll");
 
-    setTimeout(() => {
+    const sendSettingToFrames = () => {
         Array.from(window.frames).forEach((frame) => {
             if (frame.postMessage) {
                 frame.postMessage({ scrollSync: isSyncScrollEnabled }, "*");
             }
         });
-    }, 3000); // TODO find a better way to ensure the pages are loaded
+    };
+
+    setTimeout(sendSettingToFrames, 100);
+    setTimeout(sendSettingToFrames, 300);
+    setTimeout(sendSettingToFrames, 600);
+    setTimeout(sendSettingToFrames, 1000);
+    setTimeout(sendSettingToFrames, 2000);
 };
 
 document.addEventListener("DOMContentLoaded", loadFrames);
