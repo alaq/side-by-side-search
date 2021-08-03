@@ -71,7 +71,7 @@ function showSearchPage() {
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.parentFrameId === 0 && !urlIsEngine(details.url)) {
         chrome.tabs.get(details.tabId, (tab) => {
-            if (SEARCH_BASE_URLS.some((baseUrl) => tab.url.includes(baseUrl + "search.html"))) {
+            if (tab.url.includes(BASE_URL + "search.html")) {
                 chrome.tabs.update(details.tabId, { url: details.url });
             }
         });
@@ -85,11 +85,18 @@ const sendToSiblingFrame = (port, msg) => {
             tabId: port.sender.tab.id,
         },
         (frames) => {
-            portsMap[
-                frames.filter((f) => {
-                    return f.frameId !== port.sender.frameId && f.parentFrameId !== -1;
-                })[0].frameId
-            ].postMessage(msg);
+            const sendRequest = () => {
+                portsMap[
+                    frames.filter((f) => {
+                        return f.frameId !== port.sender.frameId && f.parentFrameId !== -1;
+                    })[0].frameId
+                ].postMessage(msg);
+            };
+            try {
+                sendRequest();
+            } catch (_) {
+                setTimeout(sendRequest, 1000);
+            }
         }
     );
 };

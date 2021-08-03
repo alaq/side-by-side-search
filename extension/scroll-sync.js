@@ -2,6 +2,7 @@ let scrollLock = false;
 let scrollSyncEnabled = false;
 let localUrls;
 let sendUrlsAcknowledged = false;
+let remoteUrls = [];
 
 const domainsToFilter = [
     "google.com",
@@ -28,6 +29,11 @@ if (getFrameDepth(window.self) === 1) {
     scrollPort.postMessage({
         urls: (localUrls = getUrlsFromPage()),
     });
+    setTimeout(() => {
+        scrollPort.postMessage({
+            urls: (localUrls = getUrlsFromPage()),
+        });
+    }, 1000);
 
     document.addEventListener("scroll", function () {
         if (!scrollLock && scrollSyncEnabled) {
@@ -46,7 +52,8 @@ if (getFrameDepth(window.self) === 1) {
             window.scroll(message.x, message.y);
         } else if (message.urls.length) {
             scrollPort.postMessage({ ack: true });
-            if (!sendUrlsAcknowledged) {
+            if (message.urls.length > remoteUrls.length) {
+                console.log(message.urls.length, "vs", remoteUrls.length);
                 scrollPort.postMessage({
                     urls: getUrlsFromPage(),
                 });
@@ -59,7 +66,15 @@ if (getFrameDepth(window.self) === 1) {
             // Decorate links
             let links = document.getElementsByTagName("a");
             for (let i = 0; i < links.length; i++) {
-                if (uniqueUrls.includes(links[i].href)) links[i].style["background-color"] = "aqua";
+                if (uniqueUrls.includes(links[i].href)) {
+                    links[i].style["background-color"] = "aqua";
+                    let children = Array.from(links[i].children);
+                    while (children.length) {
+                        const child = children.shift();
+                        child.style["background-color"] = "aqua";
+                        children.push(...Array.from(child.children));
+                    }
+                }
             }
         }
     });

@@ -21,6 +21,7 @@
                 "https://duckduckgo.com/?q=*",
                 "https://www.startpage.com/do/dsearch?query=*",
                 "https://side-by-side-search.vercel.app/*",
+                "file:///Users/adrien/git/side-by-side-search/frontend/*",
                 "https://*/*"
             ],
             "run_at": "document_end"
