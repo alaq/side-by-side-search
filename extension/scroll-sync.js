@@ -53,7 +53,6 @@ if (getFrameDepth(window.self) === 1) {
         } else if (message.urls.length) {
             scrollPort.postMessage({ ack: true });
             if (message.urls.length > remoteUrls.length) {
-                console.log(message.urls.length, "vs", remoteUrls.length);
                 scrollPort.postMessage({
                     urls: getUrlsFromPage(),
                 });
@@ -61,7 +60,6 @@ if (getFrameDepth(window.self) === 1) {
             remoteUrls = message.urls;
 
             let uniqueUrls = getUniqueUrls(localUrls, remoteUrls);
-            console.log("unique urls on", window.location.host, uniqueUrls);
 
             // Decorate links
             let links = document.getElementsByTagName("a");
