@@ -88,7 +88,7 @@ const sendToSiblingFrame = (port, msg) => {
             const sendRequest = () => {
                 portsMap[
                     frames.filter((f) => {
-                        return f.frameId !== port.sender.frameId && f.parentFrameId !== -1;
+                        return f.frameId !== port.sender.frameId && f.parentFrameId === 0;
                     })[0].frameId
                 ].postMessage(msg);
             };
