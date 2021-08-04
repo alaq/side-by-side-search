@@ -46,12 +46,12 @@ if (getFrameDepth(window.self) === 1) {
 
     scrollPort.onMessage.addListener((message) => {
         if (message.ack) {
-            sendUrlsAcknowledged = true;
+            sendUrlsAcknowledged = message.ack;
         } else if (message.y || message.x) {
             scrollLock = true;
             window.scroll(message.x, message.y);
         } else if (message.urls.length) {
-            scrollPort.postMessage({ ack: true });
+            scrollPort.postMessage({ ack: window.location.host });
             if (message.urls.length > remoteUrls.length) {
                 scrollPort.postMessage({
                     urls: getUrlsFromPage(),
@@ -65,11 +65,11 @@ if (getFrameDepth(window.self) === 1) {
             let links = document.getElementsByTagName("a");
             for (let i = 0; i < links.length; i++) {
                 if (uniqueUrls.includes(links[i].href)) {
-                    links[i].style["background-color"] = "aqua";
+                    links[i].style["background-color"] = "rgba(0,255,255,0.3)";
                     let children = Array.from(links[i].children);
                     while (children.length) {
                         const child = children.shift();
-                        child.style["background-color"] = "aqua";
+                        child.style["background-color"] = "rgba(0,255,255,0.3)";
                         children.push(...Array.from(child.children));
                     }
                 }

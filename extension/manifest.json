@@ -36,5 +36,5 @@
     "manifest_version": 2,
     "name": "Side-by-side Search",
     "permissions": ["webRequest", "webRequestBlocking", "webNavigation", "tabs", "<all_urls>"],
-    "version": "1.2.0"
+    "version": "1.2.1"
 }
